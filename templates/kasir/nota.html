@@ -1,0 +1,59 @@
+{% extends 'base_kasir.html' %} 
+{% block title %}Nota Pemesanan{% endblock %}
+
+{% block head %}
+<style>
+  .nota-table {
+    background-color: white;
+  }
+  .judul-sm.txt-center {
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="main" class="main-content">
+  <div class="container">
+    <div class="col-header mt-4">
+      <p class="judul-sm txt-center"><b>Nota Pesanan {{ hasil[1] }} </b></p>
+    </div>
+
+    <div class="nota mb-4">
+      <table class="table table-bordered table-hover table-striped justify-content-sm-center px-5 py-3 nota-table">
+        <tr>
+          <td>No Nota</td>
+          <td>{{ hasil[0] }}</td>
+        </tr>
+        <tr>
+          <td>Nama</td>
+          <td>{{ hasil[1] }}</td>
+        </tr>
+        <tr>
+          <td>Jenis Layanan</td>
+          <td>{{ hasil[2] }}</td>
+        </tr>
+        <tr>
+          <td>Berat</td>
+          <td>{{ hasil[3] }}</td>
+        </tr>
+        <tr>
+          <td>Tanggal</td>
+          <td>{{ hasil[4] }}</td>
+        </tr>
+        <tr>
+          <td>Harga</td>
+          <td>{{ hasil[5] }}</td>
+        </tr>
+        <tr>
+          <td>Status Pesanan</td>
+          <td>{{ hasil[6] }}</td>
+        </tr>
+      </table>
+      <a href="/dashboard_kasir">
+        <button type="button" class="btn btn-primary">Kembali</button>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

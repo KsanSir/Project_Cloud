@@ -1,0 +1,51 @@
+{%extends 'base_kasir.html'%}
+
+{%block title%}Riwayat Pesanan{%endblock%}
+{%block content%}
+<div id="main" class="main-content">
+  <div class="container">
+  <br>
+      <div class="col-header">
+        <p class="judul-sm"><b>Riwayat Transaksi</b></p>
+      </div>
+      <div class="col txt-right">
+      <a class="btn btn-primary float-right" href="/tambah_pesanan/" >+ Pesanan</a>
+      </div>
+<br>
+
+        <div class="transaksi">
+          <table class="table table-bordered table-hover table-striped riwayat-transaksi-table">
+            <thead class="table-light">
+              <tr>
+              <th>No Nota</th>
+              <th>Nama</th>
+              <th>Jenis Laundry</th>
+              <th>Berat</th>
+              <th>Tanggal Masuk</th>
+              <th>Total Harga</th>
+              <th>Penerima</th>
+            
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for row in transaksi %}
+            <tr>
+              <td>{{row.0}}</td>
+              <td>{{row.1}}</td>
+              <td>{{row.2}}</td>
+              <td>{{row.3}}</td>
+              <td>{{row.4}}</td>
+              <td>{{row.5}}</td>
+              <td>{{row.6}}</td>
+            </tr>
+            
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+
+</div>
+</div>
+<br>
+{%endblock%}

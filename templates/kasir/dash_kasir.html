@@ -1,0 +1,70 @@
+{%extends 'base_kasir.html'%} 
+
+{%block title%}Dashboard Laundryon{%endblock%}
+{%block content%}
+<div id="main" class="main-content">
+    <div class="container">
+        <div class="baris">
+            <div class="selamat-datang">
+                <div class="col-header">
+                    <strong class="judul-sm">Selamat Datang </strong>
+                    <h6 class="judul-md">Hello ADMIN, Selamat Bekerja haha</h6>
+                </div>
+            </div>
+        </div>
+        <div class="baris">
+            <div class="col col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-panel text-center">
+                            <div class="panel-header">
+                                <strong>Total Pelanggan</strong>
+                                <h2>{{ jml_pelanggan }}</h2>
+                            </div>
+                            
+                            <div class="panel-icon">
+                                <img src="{{ url_for('static',filename='img/orang.png')}}" alt="pelanggan" height="48">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-panel text-center">
+                            <div class="panel-header">
+                                <strong>Pesanan Belum Selesai</strong>
+                                <h2>{{ belum_selesai }}</h2>
+                            </div>
+
+                            <div class="panel-icon">
+                                <img src="{{ url_for('static',filename='img/order-now.png')}}" alt="paket" height="48">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-panel text-center">
+                            <div class="panel-header">
+                                <strong>Jumlah Pesanan</strong>
+                                <h2>{{ jml_pesanan }}</h2>
+                            </div>
+
+                            <div class="panel-icon">
+                                <img src="{{ url_for('static',filename='img/jml_paket.png')}}" alt="paket" height="48">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+{%endblock%}

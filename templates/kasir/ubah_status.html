@@ -1,0 +1,106 @@
+{%extends 'base_kasir.html'%} 
+
+{%block title%}Ubah Status Pesanan{%endblock%}
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/select2.min.css')}}">
+{%endblock%}
+
+{%block content%}
+<div id="main" class="main-content">
+  <div class="container">
+  <br>
+      <div class="col-header">
+        <p class="judul-sm"><b>Ubah Status Pesanan</b></p>
+      </div>
+<br>
+
+<div class="">
+    <form action="{{url_for('proses_ubah_status')}}" method="POST">
+        <table>
+            {%for row in status%} 
+            <tr>
+                <td><label for="" class="">Id Nota</label></td>
+                <td>
+                    <input type="text" name="id_nota" class="form-control" value="{{row.0}}">
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="" class="">Nama</label></td>
+                <td>
+                    <input type="text" name="nama" class="form-control" value="{{row.1}}">
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="">Status Pesanan</label></td>
+                <td>
+                    <select name="status_pesanan" type="text" id="status" class="form-control" placeholde="Status Pesanan" value="{{row.2}}"></select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="">Status Pembayaran</label></td>
+                <td>
+                    <select name="status_pembayaran" id="status_pembayaran" class="form-select" placeholder="Status Pembayaran" value="{{row.3}}"></select>
+                </td>
+            </tr>
+
+            <tr>
+              <td><label for="">Tanggal Selesai</label></td>
+              <td>
+                <input type="date" name="tanggal_keluar" class="form-control" value="{{row.4}}"> 
+              </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="box-footer mt-3">
+            <input class="btn btn-primary" type="submit" value="Submit">
+            <a class="btn btn-primary" href="/status_peasanan/">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</div>
+</div>
+
+<script src="{{url_for('static', filename='js/jquery-3.7.0.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/select2.full.min.js')}}"></script>
+<script defer>
+  $status = [
+    {
+      id: 'DITERIMA',
+      text: 'Pesanan diterima'
+    },
+    {
+      id: 'PROSES',
+      text: 'Dalam Proses'
+    },
+    {
+      id: 'SELESAI',
+      text: 'Selesai'
+    },
+    {
+      id: 'DIAMBIL',
+      text: 'Pesanan di Ambil'
+    }
+  ];
+  $('#status').select2({
+    data: $status
+  })
+
+  $status_pembayaran = [
+    {
+      id: 'LUNAS',
+      text: 'Pesanan Lunas'
+    },
+    {
+      id: 'BELUM BAYAR',
+      text: 'Belum Bayar'
+    }
+  ];
+  $('#status_pembayaran').select2({
+    data: $status_pembayaran
+  })
+</script>
+{%endblock%}

@@ -1,0 +1,50 @@
+{% extends 'base_kasir.html' %} 
+
+{% block title %}Status Pesanan{% endblock %}
+
+{% block content %} 
+<div id="main" class="main-content">
+    <div class="container">
+    <br>
+        <div class="col-header ">
+        <p class="judul-sm"><b>Status Pesanan</b></p>
+        </div>
+
+        <div class="px-3 py-3 mt-3">
+            <table class="table table-bordered table-hover table-striped status-pesanan-table">
+                <thead class="table-light">
+                    <tr>
+                        <th>No Nota</th>
+                        <th>Nama</th>
+                        <th>Status Pesanan</th>
+                        <th>Status Pembayaran</th>
+                        <th>Tanggal Selesai</th>
+                        <th>Aksi</th>
+                        <th>Pembayaran</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in status %}
+                    <tr>
+                        <td>{{ row.0 }}</td>
+                        <td>{{ row.1 }}</td>
+                        <td>{{ row.2 }}</td>
+                        <td>{{ row.3 }}</td>
+                        <td>{{ row.4 }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="/ubah_status/{{ row.0 }}">Ubah</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="/bayar/{{ row.0 }}">Bayar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<br>
+{% endblock %}

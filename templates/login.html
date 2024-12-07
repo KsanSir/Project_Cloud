@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Dashboard</title>
+
+    <!-- CSS Area -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.CSS')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.CSS')}}" />
+
+    <!-- Google API Script -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+      function handleCredentialResponse(response) {
+        // Mengirim token ID ke server untuk diverifikasi
+        fetch('/google-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ credential: response.credential })
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              // Redirect ke halaman dashboard atau lainnya
+              window.location.href = '/dashboard';
+            } else {
+              alert('Google Login gagal. Silakan coba lagi.');
+            }
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box-content">
+        <div class="col box__left">
+          <div class="logo">
+            <img src="{{ url_for('static', filename='img/logo/paint (1).png') }}" alt="" />
+          </div>
+          <div class="box__left-title">
+            <h4>Login Admin Laundry</h4>
+          </div>
+
+          <div class="box__left-form">
+            <form action="{{url_for('login')}}" method="post">
+              {% if message is defined and message %}
+              <div class="alert alert-warning">
+                <strong>{{ message }}</strong>
+              </div>
+              {% endif %}
+              <div class="box__left-form-group">
+                <div class="input-form">
+                  <input type="text" name="username" placeholder="Username" />
+                </div>
+              </div>
+
+              <div class="box__left-form-group">
+                <div class="input-form">
+                  <input type="password" name="password" placeholder="Password" />
+                </div>
+              </div>
+
+              <p class="form-actions">
+                <a href="/templates/reset_password.html">Change Password</a>
+              </p>
+
+              <div class="box__left-form-group">
+                <button type="submit" name="login" class="btn-login mt-1">Login</button>
+              </div>
+            </form>
+
+            <!-- Google Login Button -->
+            <div class="box__left-form-group">
+              <div id="g_id_onload"
+                data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                data-callback="handleCredentialResponse"
+                data-auto_prompt="false">
+              </div>
+              <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="center">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col box__right">
+          <div class="box__right-content">
+            <img src="{{ url_for('static', filename='img/laundry.png') }}" alt="" class="box-img-laundry" />
+            <img src="{{ url_for('static', filename='img/celana.png') }}" alt="" class="box-img-celana" />
+            <img src="{{ url_for('static', filename='img/kaos.png') }}" alt="" class="box-img-kaos" />
+            <img src="{{ url_for('static', filename='img/kemeja.png') }}" alt="" class="box-img-kemeja" />
+
+            <!-- Bubble Variasi -->
+            <div class="bubble-1"></div>
+            <div class="bubble-2"></div>
+            <div class="bubble-3"></div>
+            <div class="bubble-4"></div>
+            <div class="bubble-5"></div>
+            <div class="bubble-6"></div>
+
+            <!-- Garis Variasi -->
+            <div class="garis garis-sm garis-1"></div>
+            <div class="garis garis-md garis-2"></div>
+            <div class="garis garis-sm garis-3"></div>
+            <div class="garis garis-md garis-4"></div>
+            <div class="garis garis-md garis-5"></div>
+            <div class="garis garis-lg garis-6"></div>
+            <div class="garis garis-lg garis-7"></div>
+            <div class="garis garis-xl garis-8"></div>
+            <div class="garis garis-sm garis-9"></div>
+            <div class="garis garis-md garis-10"></div>
+            <div class="garis garis-sm garis-11"></div>
+            <div class="garis garis-md garis-12"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; <span id="tahun"></span> LaundryOn</p>
+      <script>
+        // mengambil tanggal hari ini
+        var now = new Date();
+        var tahun = now.getFullYear();
+        // menampilkan tahun di dalam elemen HTML
+        document.getElementById("tahun").innerHTML = tahun;
+      </script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+{%extends 'base_kasir.html'%} 
+
+{%block title%}Data Pelanggan{%endblock%}
+
+{%block content%}
+<div id="main" class="main-content">
+  <div class="container">
+  <br>
+      <div class="col-header">
+        <p class="judul-sm"><b>Informasi Data Pelanggan</b></p>
+      </div>
+      <div class="col txt-right">
+      <a onclick="" href="{{url_for('tambah_pelanggan')}}" class="btn btn-primary">+ Pelanggan</a>
+      </div>
+<div class="px-3 py-3 mt-3">
+  <div class="d-flex justify-content-between mb-3"></div>
+  <table class="table table-bordered table-hover table-striped data-pelanggan-table">
+    <thead class="table-light">
+      <tr>
+        <th>Id Pelanggan</th>
+        <th>Nama Pelanggan</th>
+        <th>Kontak</th>
+        <th>Alamat</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for row in dt_pelanggan %}
+      <tr>
+        <td>{{row.0}}</td>
+        <td>{{row.1}}</td>
+        <td>{{row.2}}</td>
+        <td>{{row.3}}</td>
+        <td class="col-sm"><a href="/ubah_pelanggan/{{row.0}}" class="btn btn-warning">Ubah</a>
+          <a onclick="return confirm('Yakin ingin menghapus {{row.1}}')" href="/hapus/{{row.0}}" class="btn btn-danger">Hapus</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+ 
+</div>
+</div>
+
+{%endblock%}
+
+<button onclick="runPopup()">Click Me</button>
+  

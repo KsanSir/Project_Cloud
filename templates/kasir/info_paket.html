@@ -1,0 +1,33 @@
+{%extends 'base_kasir.html'%}
+{%block title%}Riwayat Pesanan{%endblock%}
+{%block content%}
+<div id="main" class="main-content">
+  <div class="container">
+    <div class="col-header mt-4">
+        <p class="judul-sm" style="text-align: center;"><b>Harga Paket Laundry</b></p>
+    </div>
+      <div class="info_harga">
+        <table class="table table-bordered table-hover table-striped harga-paket-table">
+          <thead class="table-light">
+            <tr>
+              <th>Nama Paket</th>
+              <th>Harga Paket</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for row in paket %}
+            <tr>
+              <td>{{row.0}}</td>
+              <td>{{row.1}}</td>
+            </tr>
+            
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+
+</div>
+</div>
+<br>
+{%endblock%}

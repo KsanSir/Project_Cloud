@@ -1,0 +1,142 @@
+{% extends 'base_kasir.html' %}
+
+{% block title %}Tambah Pesanan{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.CSS') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.CSS') }}" />
+<style>
+  .tambah-pesanan-table {
+    background-color: white;
+  }
+  .judul-sm.txt-center {
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="main" class="main-content">
+  <div class="container">
+    <div class="col-header mt-4">
+      <p class="judul-sm txt-center"><b>Silahkan Masukkan Pesanan Baru</b></p>
+    </div>
+    <div class="align-self-center">
+      <form class="justify-content-sm-center px-5 py-3" action="{{ url_for('transaksi') }}" method="POST">
+        <table class="d-sm-flex justify-content-sm-center mb-5 table-primary tambah-pesanan-table">
+          <tr class="align-self-center">
+            <td>
+              <input type="hidden" class="form-control" name="id_nota" disabled value="__AUTO__">
+            </td>    
+          </tr>
+      
+          <tr class="align-self-center">
+            <td><label>Nama</label></td>
+            <td>
+              <div class="">
+                <select name="id_pelanggan" id="id_pelanggan" class="form-control" placeholder="Cari Pelanggan"></select>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="align-self-center">
+            <td>Jenis Paket</td>
+            <td class="align-self-center">
+              <select class="form-select" name="jenis_laundry" aria-label="Default select example">
+                <option selected>Pilih Paket</option>
+                <option value="EXPRESS">Express</option>
+                <option value="KILAT">Kilat</option>
+                <option value="REGULER">Reguler</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr class="align-self-center">
+            <td><label class="col-sm-4 col-form-label">Berat</label></td>
+            <td>
+              <div class="col-sm-16">
+                <input type="text" class="form-control" name="berat"/>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="align-self-center">
+            <td><label class="col-sm-16 col-form-label">Tanggal Masuk</label></td>
+            <td>
+              <input type="datetime-local" class="" name="tanggal_masuk" placeholder="date"></input>
+            </td>
+          </tr>
+
+          <tr class="align-self-center">
+            <td><label class="col-sm-4 col-form-label">Penerima</label></td>
+            <td>
+              <select type="text" class="form-control" name="nama_karyawan" id="pegawai" placeholder="Pegawai"></select>
+            </td>
+          </tr>
+
+          <tr class="align-self-center">
+            <td><label class="col-sm-16 col-md-6" for="">Status Pembayaran</label></td>
+            <td>
+              <select class="form-select" name="status_pembayaran" aria-label="Default select example">
+                <option selected>Pilih Status</option>
+                <option value="LUNAS">Lunas</option>
+                <option value="BELUM BAYAR">Belum Bayar</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <div class="d-flex justify-content-between">
+          <a href="/riwayat_pesanan/" class="btn btn-primary">Kembali</a>
+          <input class="btn btn-primary ml-auto" type="submit" value="Pesan">
+        </div>
+      </form>
+      </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/select2.full.min.js') }}"></script>
+<script defer>
+  $('#id_pelanggan').select2({
+    ajax: {
+      url: "http://127.0.0.1:5000/pelanggan/",
+      dataType: 'json',
+      data: function (params) {
+        return {
+          q: params.term,
+        };
+      },
+      processResults: function (data) {
+        console.log(data)
+        return {
+          results: data
+        }
+      }
+    },
+    minimumInputLength: 2,
+    placeholder: 'Cari Nama Pelanggan'
+  })
+
+  $('#pegawai').select2({
+    ajax: {
+      url: "http://127.0.0.1:5000/karyawan/",
+      dataType: 'json',
+      data: function (params) {
+        return {
+          q: params.term,
+        };
+      },
+      processResults: function (data) {
+        console.log(data)
+        return {
+          results: data
+        }
+      }
+    },
+    minimumInputLength: 2,
+    placeholder: 'Cari Nama Karyawan'
+  })
+</script>
+
+{% endblock %}
